@@ -1,7 +1,14 @@
+import 'package:breakmarket/webview_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    const MaterialApp(
+      home: MainApp(),
+      // home: MyHomePage(),
+    ),
+  );
 }
 
 class MainApp extends StatefulWidget {
@@ -12,8 +19,28 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  WebViewManager webviewManager = WebViewManager();
+
+  @override
+  void initState() {
+    super.initState();
+    webviewManager.init();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return WillPopScope(
+      onWillPop: () async {
+        if (await webviewManager.controller.canGoBack()) {
+          webviewManager.controller.goBack();
+          return false;
+        }
+        return true;
+      },
+      child: SafeArea(
+        child: Scaffold(
+            body: WebViewWidget(controller: webviewManager.controller)),
+      ),
+    );
   }
 }
