@@ -30,6 +30,6 @@ class WebViewManager {
     }
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.loadRequest(Uri.parse('https://market.break.co.kr'));
+    controller.loadRequest(Uri.parse('https://break-webview.vercel.app'));
   }
 }
