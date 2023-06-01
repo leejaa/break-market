@@ -6,6 +6,11 @@ class WebViewManager {
   late final WebViewController controller;
   late final PlatformWebViewControllerCreationParams params;
 
+  addKakaoChannel() {
+    controller.addJavaScriptChannel('kakaologin',
+        onMessageReceived: (JavaScriptMessage message) async {});
+  }
+
   init() {
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
       params = WebKitWebViewControllerCreationParams(
@@ -17,6 +22,8 @@ class WebViewManager {
     }
 
     controller = WebViewController.fromPlatformCreationParams(params);
+
+    addKakaoChannel();
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
 
@@ -30,6 +37,7 @@ class WebViewManager {
     }
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.loadRequest(Uri.parse('https://break-webview.vercel.app'));
+    // controller.loadRequest(Uri.parse('https://break-webview.vercel.app'));
+    controller.loadRequest(Uri.parse('http://192.168.0.93:3000/login'));
   }
 }
