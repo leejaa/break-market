@@ -1,8 +1,16 @@
 import 'package:breakmarket/webview_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // runApp() 호출 전 Flutter SDK 초기화
+  KakaoSdk.init(
+    nativeAppKey: 'da30ed6f3e351b7071817e5462fdac85',
+  );
+
   runApp(
     const MaterialApp(
       home: MainApp(),
