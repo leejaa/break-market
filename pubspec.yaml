@@ -39,6 +39,7 @@ dependencies:
   webview_flutter_android: ^3.7.0
   webview_flutter_wkwebview: ^3.4.3
   kakao_flutter_sdk: ^1.4.3
+  http: ^1.0.0
 
 dev_dependencies:
   flutter_test:

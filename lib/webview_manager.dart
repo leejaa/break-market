@@ -2,6 +2,7 @@ import 'package:breakmarket/kakao_login.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 class WebViewManager {
   late final WebViewController controller;
@@ -11,7 +12,13 @@ class WebViewManager {
     controller.addJavaScriptChannel('kakaologin',
         onMessageReceived: (JavaScriptMessage message) async {
       var kakaoLogin = KakaoLogin();
-      kakaoLogin.login();
+      await kakaoLogin.login();
+
+      OAuthToken token = await kakaoLogin.getAuthToken();
+
+      await controller.runJavaScriptReturningResult(
+        "setCookie('{accessToken: ${token.accessToken}, refreshToken: ${token.refreshToken}, loginType: kakao}')",
+      );
     });
   }
 
@@ -41,7 +48,7 @@ class WebViewManager {
     }
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.loadRequest(Uri.parse('https://break-webview.vercel.app/login'));
-    // controller.loadRequest(Uri.parse('http://192.168.0.93:3000/login'));
+    // controller.loadRequest(Uri.parse('https://break-webview.vercel.app/login'));
+    controller.loadRequest(Uri.parse('http://192.168.0.93:3000/login'));
   }
 }
