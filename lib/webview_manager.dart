@@ -1,4 +1,6 @@
+import 'package:breakmarket/apple_login.dart';
 import 'package:breakmarket/kakao_login.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
@@ -17,8 +19,16 @@ class WebViewManager {
       OAuthToken token = await kakaoLogin.getAuthToken();
 
       await controller.runJavaScriptReturningResult(
-        "setCookie('{accessToken: ${token.accessToken}, refreshToken: ${token.refreshToken}, loginType: kakao}')",
+        "setCookie('{\"accessToken\": \"${token.accessToken}\", \"refreshToken\": \"${token.refreshToken}\", \"loginType\": \"kakao\"}')",
       );
+    });
+  }
+
+  addAppleChannel() {
+    controller.addJavaScriptChannel('applelogin',
+        onMessageReceived: (JavaScriptMessage message) async {
+      var appleLogin = AppleLogin();
+      await appleLogin.login();
     });
   }
 
@@ -35,6 +45,7 @@ class WebViewManager {
     controller = WebViewController.fromPlatformCreationParams(params);
 
     addKakaoChannel();
+    addAppleChannel();
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
 
@@ -48,7 +59,7 @@ class WebViewManager {
     }
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    // controller.loadRequest(Uri.parse('https://break-webview.vercel.app/login'));
-    controller.loadRequest(Uri.parse('http://192.168.0.93:3000/login'));
+    // controller.loadRequest(Uri.parse('https://break-webview.vercel.app'));
+    controller.loadRequest(Uri.parse('http://192.168.0.93:3000'));
   }
 }
