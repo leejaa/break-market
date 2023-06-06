@@ -18,10 +18,13 @@ class GoogleLogin {
   }
 
   login() async {
-    GoogleSignIn googleSignIn = GoogleSignIn(scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ]);
+    GoogleSignIn googleSignIn = GoogleSignIn(
+        // clientId:
+        //     '845312398147-el5et7id81f808v4q09qt22t01uvvcpp.apps.googleusercontent.com',
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ]);
 
     GoogleSignInAccount? signInAccount = await googleSignIn.signIn();
 
