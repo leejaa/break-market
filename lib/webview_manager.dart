@@ -1,6 +1,7 @@
 import 'package:breakmarket/apple_login.dart';
 import 'package:breakmarket/google_login.dart';
 import 'package:breakmarket/kakao_login.dart';
+import 'package:breakmarket/naver_login.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -10,6 +11,20 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 class WebViewManager {
   late final WebViewController controller;
   late final PlatformWebViewControllerCreationParams params;
+
+  addNaverChannel() {
+    controller.addJavaScriptChannel('naverlogin',
+        onMessageReceived: (JavaScriptMessage message) async {
+      var naverLogin = NaverLogin();
+      await naverLogin.login();
+      var accessToken = naverLogin.getAccessToken();
+      var refreshToken = naverLogin.getRefreshToken();
+
+      await controller.runJavaScriptReturningResult(
+        "setCookie('{\"accessToken\": \"${accessToken}\", \"refreshToken\": \"${refreshToken}\", \"loginType\": \"kakao\"}')",
+      );
+    });
+  }
 
   addGoogleChannel() {
     controller.addJavaScriptChannel('googlelogin',
@@ -70,6 +85,7 @@ class WebViewManager {
     addKakaoChannel();
     addAppleChannel();
     addGoogleChannel();
+    addNaverChannel();
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
 
