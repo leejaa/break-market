@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "480951865146",
+    "project_id": "break-market-dlwkgns",
+    "storage_bucket": "break-market-dlwkgns.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480951865146:android:2c20d7d7b69bc410f8ca03",
+        "android_client_info": {
+          "package_name": "com.breakncompany.breakmarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480951865146-v3u83rugk2285alh0qbrj3io4j2g57fo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIuxNcYHCNH4F35ki4u4edD1p2DLx16Z0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480951865146-v3u83rugk2285alh0qbrj3io4j2g57fo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "480951865146-h18ujkbi3gh72l5cseiis3mgg81d9j25.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.breakncompany.breakmarket"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
