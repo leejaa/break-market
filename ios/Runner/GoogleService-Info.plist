@@ -3,12 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>845312398147-el5et7id81f808v4q09qt22t01uvvcpp.apps.googleusercontent.com</string>
+	<string>480951865146-h18ujkbi3gh72l5cseiis3mgg81d9j25.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.845312398147-el5et7id81f808v4q09qt22t01uvvcpp</string>
+	<string>com.googleusercontent.apps.480951865146-h18ujkbi3gh72l5cseiis3mgg81d9j25</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCBH4C-LzLkRIx5eo4CjRzHLsdgvdWfBrY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>480951865146</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.breakncompany.breakmarket</string>
+	<key>PROJECT_ID</key>
+	<string>break-market-dlwkgns</string>
+	<key>STORAGE_BUCKET</key>
+	<string>break-market-dlwkgns.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:480951865146:ios:e91e57b669308cf3f8ca03</string>
 </dict>
 </plist>

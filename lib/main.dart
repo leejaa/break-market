@@ -1,14 +1,21 @@
+import 'package:breakmarket/notification_manager.dart';
 import 'package:breakmarket/webview_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // runApp() 호출 전 Flutter SDK 초기화
   KakaoSdk.init(
     nativeAppKey: '371c839e44bb2539089fea478be5e3ee',
+  );
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(
@@ -17,6 +24,9 @@ void main() {
       // home: MyHomePage(),
     ),
   );
+
+  var notificationManager = NotificationManager();
+  await notificationManager.init();
 }
 
 class MainApp extends StatefulWidget {
