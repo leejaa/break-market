@@ -1,3 +1,4 @@
+import 'package:breakmarket/notification_manager.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,11 +30,15 @@ class KakaoLogin {
 
   saveData() async {
     var client = http.Client();
+    var notificationManager = NotificationManager();
+    var appToken = await notificationManager.getToken();
     var response = await client
         // .post(Uri.http('192.168.0.93:3000', '/api/login'), body: {
-        .post(Uri.https('break-webview.vercel.app', '/api/login'), body: {
+        .post(Uri.http('172.30.1.22:3000', '/api/login'), body: {
+      // .post(Uri.https('break-webview.vercel.app', '/api/login'), body: {
       'accessToken': authToken.accessToken,
-      'refreshToken': authToken.refreshToken
+      'refreshToken': authToken.refreshToken,
+      'appToken': appToken,
     });
   }
 
