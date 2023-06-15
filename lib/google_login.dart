@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:breakmarket/constants.dart';
+import 'package:breakmarket/notification_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:http/http.dart' as http;
@@ -30,12 +32,14 @@ class GoogleLogin {
 
     GoogleSignInAuthentication credential = await signInAccount!.authentication;
 
+    var notificationManager = NotificationManager();
+
+    var appToken = notificationManager.getToken();
+
     var client = http.Client();
-    await client.post(Uri.http('172.30.1.22:3000', '/api/google_login'), body: {
-      // .post(Uri.http('192.168.0.93:3000', '/api/google_login'), body: {
-      // .post(Uri.https('break-webview.vercel.app', '/api/google_login'),
-      //     body: {
+    await client.post(Uri.http(url, '/api/google_login'), body: {
       'email': signInAccount.email,
+      'appToken': appToken,
     });
 
     accessToken = credential.accessToken;

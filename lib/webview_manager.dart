@@ -1,4 +1,5 @@
 import 'package:breakmarket/apple_login.dart';
+import 'package:breakmarket/constants.dart';
 import 'package:breakmarket/google_login.dart';
 import 'package:breakmarket/kakao_login.dart';
 import 'package:breakmarket/naver_login.dart';
@@ -99,8 +100,8 @@ class WebViewManager {
     }
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    // controller.loadRequest(Uri.parse('https://break-webview.vercel.app'));
-    // controller.loadRequest(Uri.parse('http://192.168.0.93:3000'));
-    controller.loadRequest(Uri.parse('http://172.30.1.22:3000'));
+    // controller.loadRequest(Uri.parse('https://$url'));
+    // controller.loadRequest(Uri.parse('http://$url'));
+    controller.loadRequest(Uri.parse('http://$url'));
   }
 }
