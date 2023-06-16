@@ -5,6 +5,8 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:http/http.dart' as http;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import 'notification_manager.dart';
+
 class AppleLogin {
   late String code;
   late String accessToken;
@@ -38,9 +40,11 @@ class AppleLogin {
   login() async {
     await getCode();
     var client = http.Client();
-    var response = await client.post(Uri.https(url, '/api/apple_login'), body: {
-      'code': code,
-    });
+    var notificationManager = NotificationManager();
+    var appToken = await notificationManager.getToken();
+    // var response = await client.post(Uri.https(url, '/api/apple_login'), body: {
+    var response = await client.post(Uri.http(url, '/api/apple_login'),
+        body: {'code': code, 'appToken': appToken});
 
     var data = jsonDecode(response.body);
 

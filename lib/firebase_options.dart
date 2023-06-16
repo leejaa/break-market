@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAIuxNcYHCNH4F35ki4u4edD1p2DLx16Z0',
+    apiKey: 'AIzaSyD_iZkxrUUaJUS4IO0rYsol5SCzzFHiSAc',
     appId: '1:480951865146:android:2c20d7d7b69bc410f8ca03',
     messagingSenderId: '480951865146',
     projectId: 'break-market-dlwkgns',
@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '480951865146',
     projectId: 'break-market-dlwkgns',
     storageBucket: 'break-market-dlwkgns.appspot.com',
-    iosClientId: '480951865146-h18ujkbi3gh72l5cseiis3mgg81d9j25.apps.googleusercontent.com',
+    iosClientId:
+        '480951865146-h18ujkbi3gh72l5cseiis3mgg81d9j25.apps.googleusercontent.com',
     iosBundleId: 'com.breakncompany.breakmarket',
   );
 }

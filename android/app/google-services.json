@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "480951865146-q2ts929sc92ncktkk1koh3j816sdsokv.apps.googleusercontent.com",
+          "client_id": "480951865146-mfge5r900lvigeka5igrqh4lh1e75pmu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.breakncompany.breakmarket",
-            "certificate_hash": "63ebd102c424fb3063f938c3c9fc300546a11ed7"
+            "certificate_hash": "83b7ca01669d44613e3e2161c15ea421b2a4413f"
           }
         },
         {
@@ -28,7 +28,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAIuxNcYHCNH4F35ki4u4edD1p2DLx16Z0"
+          "current_key": "AIzaSyD_iZkxrUUaJUS4IO0rYsol5SCzzFHiSAc"
         }
       ],
       "services": {

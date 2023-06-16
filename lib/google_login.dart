@@ -22,15 +22,17 @@ class GoogleLogin {
   login() async {
     GoogleSignIn googleSignIn = GoogleSignIn(
         // clientId:
-        //     '845312398147-el5et7id81f808v4q09qt22t01uvvcpp.apps.googleusercontent.com',
-        scopes: [
-          'email',
-          'https://www.googleapis.com/auth/contacts.readonly',
-        ]);
+        //     '480951865146-q2ts929sc92ncktkk1koh3j816sdsokv.apps.googleusercontent.com',
+        // scopes: [
+        //   'email',
+        //   'https://www.googleapis.com/auth/contacts.readonly',
+        // ]
+        );
 
-    GoogleSignInAccount? signInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? signInAccount = await GoogleSignIn().signIn();
 
-    GoogleSignInAuthentication credential = await signInAccount!.authentication;
+    final GoogleSignInAuthentication credential =
+        await signInAccount!.authentication;
 
     var notificationManager = NotificationManager();
 
