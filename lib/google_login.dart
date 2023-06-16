@@ -34,7 +34,7 @@ class GoogleLogin {
 
     var notificationManager = NotificationManager();
 
-    var appToken = notificationManager.getToken();
+    var appToken = await notificationManager.getToken();
 
     var client = http.Client();
     await client.post(Uri.http(url, '/api/google_login'), body: {
