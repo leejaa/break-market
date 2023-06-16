@@ -54,5 +54,8 @@
         <meta-data
            android:name="com.naver.sdk.clientName"
            android:value="@string/client_name" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="high_importance_channel" />
     </application>
 </manifest>
