@@ -1,4 +1,5 @@
 import 'package:breakmarket/apple_login.dart';
+import 'package:breakmarket/constants.dart';
 import 'package:breakmarket/google_login.dart';
 import 'package:breakmarket/kakao_login.dart';
 import 'package:breakmarket/naver_login.dart';
@@ -28,7 +29,6 @@ class WebViewManager {
       String newMessage = double.parse(message.message).toStringAsFixed(0);
 
       String nextUrl = '$url/card/${newMessage}';
-      // String nextUrl = 'https://zigzag.kr/catalog/products/112511532';
       context.push('/detail?url=$nextUrl');
 
       // Navigator.push(
@@ -42,10 +42,10 @@ class WebViewManager {
     controller.addJavaScriptChannel('notification',
         onMessageReceived: (JavaScriptMessage message) async {
       var client = http.Client();
+
+      var response = await client.post(Uri.http(url2, '/api/notification'));
       // var response =
-      //     await client.post(Uri.http(url ?? '', '/api/notification'));
-      var response =
-          await client.post(Uri.https(url ?? '', '/api/notification'));
+      //     await client.post(Uri.https(url ?? '', '/api/notification'));
     });
   }
 
@@ -131,8 +131,8 @@ class WebViewManager {
           .setAllowsBackForwardNavigationGestures(true);
     }
 
-    controller.loadRequest(Uri.parse('https://$url'));
-    // controller.loadRequest(Uri.parse('http://$url'));
+    // controller.loadRequest(Uri.parse('https://$url'));
+    controller.loadRequest(Uri.parse('http://$url'));
 
     addKakaoChannel();
     addAppleChannel();

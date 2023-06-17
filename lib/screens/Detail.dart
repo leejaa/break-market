@@ -21,6 +21,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    webviewManager.setContext(context);
     return WillPopScope(
       onWillPop: () async {
         if (await webviewManager.controller.canGoBack()) {

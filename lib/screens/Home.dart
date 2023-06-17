@@ -1,6 +1,8 @@
 import 'package:breakmarket/constants.dart';
 import 'package:breakmarket/webview_manager.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     webviewManager.setContext(context);
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      var navigation = message.data['navigation'];
+      print("navigation: $navigation");
+      String nextUrl = '$url/card/7901';
+      context.push('/detail?url=$nextUrl');
+    });
+
     return WillPopScope(
       onWillPop: () async {
         if (await webviewManager.controller.canGoBack()) {
