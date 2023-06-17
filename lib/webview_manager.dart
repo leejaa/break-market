@@ -8,10 +8,20 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:http/http.dart' as http;
 
 class WebViewManager {
   late final WebViewController controller;
   late final PlatformWebViewControllerCreationParams params;
+
+  addNotificationChannel() {
+    controller.addJavaScriptChannel('notification',
+        onMessageReceived: (JavaScriptMessage message) async {
+      var client = http.Client();
+      // var response = await client.post(Uri.http(url, '/api/notification'));
+      var response = await client.post(Uri.https(url, '/api/notification'));
+    });
+  }
 
   addNaverChannel() {
     controller.addJavaScriptChannel('naverlogin',
@@ -87,6 +97,7 @@ class WebViewManager {
     addAppleChannel();
     addGoogleChannel();
     addNaverChannel();
+    addNotificationChannel();
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
 
