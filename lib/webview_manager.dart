@@ -1,8 +1,10 @@
 import 'package:breakmarket/apple_login.dart';
-import 'package:breakmarket/constants.dart';
 import 'package:breakmarket/google_login.dart';
 import 'package:breakmarket/kakao_login.dart';
 import 'package:breakmarket/naver_login.dart';
+import 'package:breakmarket/screens/Detail.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -13,13 +15,37 @@ import 'package:http/http.dart' as http;
 class WebViewManager {
   late final WebViewController controller;
   late final PlatformWebViewControllerCreationParams params;
+  late String? url;
+  late BuildContext context;
+
+  setContext(BuildContext contextParam) {
+    context = contextParam;
+  }
+
+  addNavigateChanngel() {
+    controller.addJavaScriptChannel('navigate',
+        onMessageReceived: (JavaScriptMessage message) async {
+      String newMessage = double.parse(message.message).toStringAsFixed(0);
+
+      String nextUrl = '$url/card/${newMessage}';
+      // String nextUrl = 'https://zigzag.kr/catalog/products/112511532';
+      context.push('/detail?url=$nextUrl');
+
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => DetailScreen(url: nextUrl)),
+      // );
+    });
+  }
 
   addNotificationChannel() {
     controller.addJavaScriptChannel('notification',
         onMessageReceived: (JavaScriptMessage message) async {
       var client = http.Client();
-      // var response = await client.post(Uri.http(url, '/api/notification'));
-      var response = await client.post(Uri.https(url, '/api/notification'));
+      // var response =
+      //     await client.post(Uri.http(url ?? '', '/api/notification'));
+      var response =
+          await client.post(Uri.https(url ?? '', '/api/notification'));
     });
   }
 
@@ -81,7 +107,8 @@ class WebViewManager {
     });
   }
 
-  init() {
+  init(String? urlParam) {
+    url = urlParam;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
       params = WebKitWebViewControllerCreationParams(
         allowsInlineMediaPlayback: true,
@@ -92,12 +119,6 @@ class WebViewManager {
     }
 
     controller = WebViewController.fromPlatformCreationParams(params);
-
-    addKakaoChannel();
-    addAppleChannel();
-    addGoogleChannel();
-    addNaverChannel();
-    addNotificationChannel();
 
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
 
@@ -110,9 +131,14 @@ class WebViewManager {
           .setAllowsBackForwardNavigationGestures(true);
     }
 
-    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    // controller.loadRequest(Uri.parse('https://$url'));
+    controller.loadRequest(Uri.parse('https://$url'));
     // controller.loadRequest(Uri.parse('http://$url'));
-    controller.loadRequest(Uri.parse('http://$url'));
+
+    addKakaoChannel();
+    addAppleChannel();
+    addGoogleChannel();
+    addNaverChannel();
+    addNotificationChannel();
+    addNavigateChanngel();
   }
 }

@@ -1,4 +1,6 @@
 import 'package:breakmarket/notification_manager.dart';
+import 'package:breakmarket/screens/Detail.dart';
+import 'package:breakmarket/screens/Home.dart';
 import 'package:breakmarket/webview_manager.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:go_router/go_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +27,7 @@ void main() async {
     nativeAppKey: '371c839e44bb2539089fea478be5e3ee',
   );
 
-  runApp(
-    const MaterialApp(
-      home: MainApp(),
-      // home: MyHomePage(),
-    ),
-  );
+  runApp(MainApp());
 }
 
 class MainApp extends StatefulWidget {
@@ -40,28 +38,89 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  WebViewManager webviewManager = WebViewManager();
-
-  @override
-  void initState() {
-    super.initState();
-    webviewManager.init();
-  }
+  final _router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/detail',
+        builder: (context, state) {
+          final url = state.queryParameters['url'];
+          return DetailScreen(url: url);
+        },
+      )
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (await webviewManager.controller.canGoBack()) {
-          webviewManager.controller.goBack();
-          return false;
-        }
-        return true;
-      },
-      child: SafeArea(
-        child: Scaffold(
-            body: WebViewWidget(controller: webviewManager.controller)),
+    return MaterialApp.router(
+      routerConfig: _router,
+      theme: ThemeData(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          },
+        ),
       ),
     );
   }
 }
+
+// test...
+
+// void main() {
+//   runApp(const MaterialApp(
+//     title: 'Navigation Basics',
+//     home: FirstRoute(),
+//   ));
+// }
+
+// class FirstRoute extends StatelessWidget {
+//   const FirstRoute({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('First Route'),
+//       ),
+//       body: Center(
+//         child: ElevatedButton(
+//           child: const Text('Open route'),
+//           onPressed: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(builder: (context) => const SecondRoute()),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class SecondRoute extends StatelessWidget {
+//   const SecondRoute({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Second Route'),
+//       ),
+//       body: Center(
+//         child: ElevatedButton(
+//           onPressed: () {
+//             Navigator.pop(context);
+//           },
+//           child: const Text('Go back!'),
+//         ),
+//       ),
+//     );
+//   }
+// }
