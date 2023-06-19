@@ -43,7 +43,7 @@ class AppleLogin {
     var notificationManager = NotificationManager();
     var appToken = await notificationManager.getToken();
     // var response = await client.post(Uri.https(url, '/api/apple_login'), body: {
-    var response = await client.post(Uri.http(url, '/api/apple_login'),
+    var response = await client.post(Uri.https(url, '/api/apple_login'),
         body: {'code': code, 'appToken': appToken});
 
     var data = jsonDecode(response.body);
