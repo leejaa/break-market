@@ -38,6 +38,14 @@
 				<string>com.googleusercontent.apps.480951865146-h18ujkbi3gh72l5cseiis3mgg81d9j25</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao371c839e44bb2539089fea478be5e3ee</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
@@ -45,6 +53,10 @@
 	<array>
 		<string>naversearchapp</string>
 		<string>naversearchthirdlogin</string>
+		<!-- 카카오톡으로 로그인 -->
+        <string>kakaokompassauth</string>
+        <!-- 카카오톡 공유 -->
+        <string>kakaolink</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

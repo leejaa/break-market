@@ -4,8 +4,10 @@ import 'package:breakmarket/google_login.dart';
 import 'package:breakmarket/kakao_login.dart';
 import 'package:breakmarket/naver_login.dart';
 import 'package:breakmarket/screens/Detail.dart';
+import 'package:breakmarket/share_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -23,7 +25,17 @@ class WebViewManager {
     context = contextParam;
   }
 
-  addNavigateChanngel() {
+  addShareChannel() {
+    controller.addJavaScriptChannel('share',
+        onMessageReceived: (JavaScriptMessage message) async {
+      // Share.share(message.message);
+      var shareManager = ShareManager();
+      shareManager.setContext(context);
+      await shareManager.share(message.message);
+    });
+  }
+
+  addNavigateChannel() {
     controller.addJavaScriptChannel('navigate',
         onMessageReceived: (JavaScriptMessage message) async {
       String newMessage = double.parse(message.message).toStringAsFixed(0);
@@ -43,9 +55,9 @@ class WebViewManager {
         onMessageReceived: (JavaScriptMessage message) async {
       var client = http.Client();
 
-      var response = await client.post(Uri.http(url2, '/api/notification'));
-      // var response =
-      //     await client.post(Uri.https(url ?? '', '/api/notification'));
+      // var response = await client.post(Uri.http(url2, '/api/notification'));
+      var response =
+          await client.post(Uri.https(url ?? '', '/api/notification'));
     });
   }
 
@@ -139,6 +151,7 @@ class WebViewManager {
     addGoogleChannel();
     addNaverChannel();
     addNotificationChannel();
-    addNavigateChanngel();
+    addNavigateChannel();
+    addShareChannel();
   }
 }
