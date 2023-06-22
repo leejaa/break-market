@@ -1,12 +1,9 @@
 import 'package:breakmarket/notification_manager.dart';
 import 'package:breakmarket/screens/Detail.dart';
-import 'package:breakmarket/screens/Home.dart';
-import 'package:breakmarket/webview_manager.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:breakmarket/screens_new/Home.dart';
+import 'package:breakmarket/utils/webview_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +17,11 @@ void main() async {
 
   var notificationManager = NotificationManager();
 
+  WebViewManager webViewManager = WebViewManager();
+
   await notificationManager.init();
+
+  webViewManager.init();
 
   // runApp() 호출 전 Flutter SDK 초기화
   KakaoSdk.init(

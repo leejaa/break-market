@@ -55,9 +55,11 @@ class WebViewManager {
         onMessageReceived: (JavaScriptMessage message) async {
       var client = http.Client();
 
+      print("url: $url");
+
       Uri httpUrl = isProduction
-          ? Uri.https(url ?? '', '/api/notification')
-          : Uri.http(url ?? '', '/api/notification');
+          ? Uri.https(url2, '/api/notification')
+          : Uri.http(url2, '/api/notification');
 
       var response = await client.post(httpUrl);
     });
