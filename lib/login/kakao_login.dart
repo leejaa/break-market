@@ -33,8 +33,10 @@ class KakaoLogin {
     var client = http.Client();
     var notificationManager = NotificationManager();
     var appToken = await notificationManager.getToken();
-    var response = await client.post(Uri.http(url, '/api/login'), body: {
-      // var response = await client.post(Uri.https(url, '/api/login'), body: {
+    Uri httpUrl = isProduction
+        ? Uri.https(url, '/api/login')
+        : Uri.http(url, '/api/login');
+    var response = await client.post(httpUrl, body: {
       'accessToken': authToken.accessToken,
       'refreshToken': authToken.refreshToken,
       'appToken': appToken,

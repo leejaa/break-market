@@ -39,7 +39,10 @@ class GoogleLogin {
     var appToken = await notificationManager.getToken();
 
     var client = http.Client();
-    await client.post(Uri.https(url, '/api/google_login'), body: {
+    Uri httpUrl = isProduction
+        ? Uri.https(url, '/api/google_login')
+        : Uri.http(url, '/api/google_login');
+    await client.post(httpUrl, body: {
       'email': signInAccount.email,
       'appToken': appToken,
     });

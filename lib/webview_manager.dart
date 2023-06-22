@@ -1,8 +1,8 @@
-import 'package:breakmarket/apple_login.dart';
 import 'package:breakmarket/constants.dart';
-import 'package:breakmarket/google_login.dart';
-import 'package:breakmarket/kakao_login.dart';
-import 'package:breakmarket/naver_login.dart';
+import 'package:breakmarket/login/apple_login.dart';
+import 'package:breakmarket/login/google_login.dart';
+import 'package:breakmarket/login/kakao_login.dart';
+import 'package:breakmarket/login/naver_login.dart';
 import 'package:breakmarket/screens/Detail.dart';
 import 'package:breakmarket/share_manager.dart';
 import 'package:flutter/material.dart';
@@ -55,9 +55,11 @@ class WebViewManager {
         onMessageReceived: (JavaScriptMessage message) async {
       var client = http.Client();
 
-      // var response = await client.post(Uri.http(url2, '/api/notification'));
-      var response =
-          await client.post(Uri.https(url ?? '', '/api/notification'));
+      Uri httpUrl = isProduction
+          ? Uri.https(url ?? '', '/api/notification')
+          : Uri.http(url ?? '', '/api/notification');
+
+      var response = await client.post(httpUrl);
     });
   }
 

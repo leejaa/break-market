@@ -91,8 +91,6 @@ class NotificationManager {
   }
 
   init() async {
-    // var token = await getToken();
-    // print('token: $token');
     await requestPermission();
     await makeAndroidChannel();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
