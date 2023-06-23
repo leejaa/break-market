@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "480951865146-80puib363v1hvrfa9au8f4knmlg5eklk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.breakncompany.breakmarket",
+            "certificate_hash": "63ebd102c424fb3063f938c3c9fc300546a11ed7"
+          }
+        },
+        {
+          "client_id": "480951865146-hmtcjj5njokk4prprdqar2o6geuceu9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.breakncompany.breakmarket",
+            "certificate_hash": "7c30ddc1ea417a6963430db964dfea619db4eeaa"
+          }
+        },
+        {
           "client_id": "480951865146-mfge5r900lvigeka5igrqh4lh1e75pmu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
