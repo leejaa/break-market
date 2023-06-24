@@ -1,6 +1,7 @@
 import 'package:breakmarket/notification_manager.dart';
 import 'package:breakmarket/screens/Detail.dart';
 import 'package:breakmarket/screens_new/Home.dart';
+import 'package:breakmarket/styles/palette.dart';
 import 'package:breakmarket/utils/webview_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -61,13 +62,13 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp.router(
       routerConfig: _router,
       theme: ThemeData(
-        pageTransitionsTheme: const PageTransitionsTheme(
-          builders: <TargetPlatform, PageTransitionsBuilder>{
-            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          },
-        ),
-      ),
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
+          primarySwatch: Palette.black),
     );
   }
 }
