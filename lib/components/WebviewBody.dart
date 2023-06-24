@@ -1,15 +1,26 @@
+import 'package:breakmarket/providers/webview_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class WebviewBody extends StatefulWidget {
-  const WebviewBody({super.key});
+class WebviewBody extends HookConsumerWidget {
+  const WebviewBody({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<WebviewBody> createState() => _WebviewBodyState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final webviewManager = ref.watch(globalWebviewManager);
 
-class _WebviewBodyState extends State<WebviewBody> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+    return WillPopScope(
+        onWillPop: () async {
+          if (await webviewManager.controller.canGoBack()) {
+            webviewManager.controller.goBack();
+            return false;
+          }
+          return true;
+        },
+        child: WebViewWidget(controller: webviewManager.controller));
   }
 }

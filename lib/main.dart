@@ -1,9 +1,11 @@
 import 'package:breakmarket/notification_manager.dart';
+import 'package:breakmarket/providers/webview_provider.dart';
 import 'package:breakmarket/screens/Detail.dart';
 import 'package:breakmarket/screens_new/Home.dart';
 import 'package:breakmarket/styles/palette.dart';
 import 'package:breakmarket/utils/webview_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -18,28 +20,23 @@ void main() async {
 
   var notificationManager = NotificationManager();
 
-  WebViewManager webViewManager = WebViewManager();
-
   await notificationManager.init();
-
-  webViewManager.init();
 
   // runApp() 호출 전 Flutter SDK 초기화
   KakaoSdk.init(
     nativeAppKey: '371c839e44bb2539089fea478be5e3ee',
   );
 
-  runApp(MainApp());
+  // runApp(MainApp());
+
+  runApp(ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatefulWidget {
-  const MainApp({super.key});
+class MainApp extends HookConsumerWidget {
+  MainApp({
+    Key? key,
+  }) : super(key: key);
 
-  @override
-  State<MainApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends State<MainApp> {
   final _router = GoRouter(
     initialLocation: '/',
     routes: [
@@ -58,7 +55,9 @@ class _MainAppState extends State<MainApp> {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(globalWebviewManager).init();
+
     return MaterialApp.router(
       routerConfig: _router,
       theme: ThemeData(
