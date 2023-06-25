@@ -2,6 +2,7 @@ import 'package:breakmarket/notification_manager.dart';
 import 'package:breakmarket/providers/webview_provider.dart';
 import 'package:breakmarket/screens/Detail.dart';
 import 'package:breakmarket/screens_new/Home.dart';
+import 'package:breakmarket/screens_new/Profile.dart';
 import 'package:breakmarket/styles/palette.dart';
 import 'package:breakmarket/utils/webview_manager.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +46,8 @@ class MainApp extends HookConsumerWidget {
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-        path: '/detail',
-        builder: (context, state) {
-          final url = state.queryParameters['url'];
-          return DetailScreen(url: url);
-        },
+        path: '/profile',
+        builder: (context, state) => const ProfileScreen(),
       )
     ],
   );

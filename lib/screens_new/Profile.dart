@@ -2,14 +2,15 @@ import 'package:breakmarket/components/CommonContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    print("profile screen...");
     return const CommonContainer(
-      title: 'Home',
-      url: '/',
+      title: 'Profile',
+      url: '/login',
     );
   }
 }

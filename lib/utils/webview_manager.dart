@@ -7,10 +7,19 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 class WebViewManager {
   late final WebViewController controller;
   late final PlatformWebViewControllerCreationParams params;
-  late String path = '/';
+  late String currentUrl = '/';
 
   getController() {
     return controller;
+  }
+
+  changeUrl(String newUrl) {
+    currentUrl = newUrl;
+  }
+
+  load() {
+    String url = '$webviewUrl$currentUrl';
+    controller.loadRequest(Uri.parse(url));
   }
 
   init() {
@@ -35,9 +44,5 @@ class WebViewManager {
       (controller.platform as WebKitWebViewController)
           .setAllowsBackForwardNavigationGestures(true);
     }
-
-    String url = '$webviewUrl$path';
-
-    controller.loadRequest(Uri.parse(url));
   }
 }

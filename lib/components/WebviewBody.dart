@@ -5,13 +5,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebviewBody extends HookConsumerWidget {
-  const WebviewBody({
+  final String url;
+
+  const WebviewBody(
+    this.url, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final webviewManager = ref.watch(globalWebviewManager);
+
+    webviewManager.changeUrl(url);
+    webviewManager.load();
 
     return WillPopScope(
         onWillPop: () async {
