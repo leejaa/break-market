@@ -1,5 +1,4 @@
 import 'package:breakmarket/notification_manager.dart';
-import 'package:breakmarket/providers/webview_provider.dart';
 import 'package:breakmarket/screens/Detail.dart';
 import 'package:breakmarket/screens_new/Home.dart';
 import 'package:breakmarket/screens_new/Profile.dart';
@@ -48,14 +47,12 @@ class MainApp extends HookConsumerWidget {
       GoRoute(
         path: '/profile',
         builder: (context, state) => const ProfileScreen(),
-      )
+      ),
     ],
   );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(globalWebviewManager).init();
-
     return MaterialApp.router(
       routerConfig: _router,
       theme: ThemeData(
@@ -69,57 +66,3 @@ class MainApp extends HookConsumerWidget {
     );
   }
 }
-
-// test...
-
-// void main() {
-//   runApp(const MaterialApp(
-//     title: 'Navigation Basics',
-//     home: FirstRoute(),
-//   ));
-// }
-
-// class FirstRoute extends StatelessWidget {
-//   const FirstRoute({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('First Route'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           child: const Text('Open route'),
-//           onPressed: () {
-//             Navigator.push(
-//               context,
-//               MaterialPageRoute(builder: (context) => const SecondRoute()),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class SecondRoute extends StatelessWidget {
-//   const SecondRoute({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Second Route'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//           child: const Text('Go back!'),
-//         ),
-//       ),
-//     );
-//   }
-// }
