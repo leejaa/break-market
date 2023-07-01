@@ -1,5 +1,6 @@
 import 'package:breakmarket/notification_manager.dart';
 import 'package:breakmarket/screens/Detail.dart';
+import 'package:breakmarket/screens_new/CardDetail.dart';
 import 'package:breakmarket/screens_new/Home.dart';
 import 'package:breakmarket/screens_new/Profile.dart';
 import 'package:breakmarket/styles/palette.dart';
@@ -42,7 +43,14 @@ class MainApp extends HookConsumerWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => HomeScreen(
+          context: context,
+        ),
+      ),
+      GoRoute(
+        path: '/card/:id',
+        builder: (context, state) =>
+            CardDetailScreen(id: state.pathParameters['id']),
       ),
       GoRoute(
         path: '/profile',

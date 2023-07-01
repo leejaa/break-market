@@ -33,14 +33,14 @@ class KakaoLogin {
     var client = http.Client();
     var notificationManager = NotificationManager();
     var appToken = await notificationManager.getToken();
-    Uri httpUrl = isProduction
-        ? Uri.https(url, '/api/login')
-        : Uri.http(url, '/api/login');
-    var response = await client.post(httpUrl, body: {
-      'accessToken': authToken.accessToken,
-      'refreshToken': authToken.refreshToken,
-      'appToken': appToken,
-    });
+    // Uri httpUrl = isProduction
+    //     ? Uri.https(url, '/api/login')
+    //     : Uri.http(url, '/api/login');
+    // var response = await client.post(httpUrl, body: {
+    //   'accessToken': authToken.accessToken,
+    //   'refreshToken': authToken.refreshToken,
+    //   'appToken': appToken,
+    // });
   }
 
   login() async {

@@ -7,7 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final BuildContext? context;
+  const HomeScreen({super.key, required this.context});
 
   @override
   State<HomeScreen> createState() => _HomeScreen();
@@ -19,8 +20,11 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
     webViewManager.init();
+    webViewManager.setContext(widget.context);
     webViewManager.load();
+    webViewManager.addNavigationChannel();
   }
 
   @override

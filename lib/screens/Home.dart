@@ -19,19 +19,19 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    webviewManager.init(url);
+    // webviewManager.init(url);
   }
 
   @override
   Widget build(BuildContext context) {
     webviewManager.setContext(context);
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      var navigation = message.data['navigation'];
-      print("navigation: $navigation");
-      String nextUrl = '$url/card/7901';
-      context.push('/detail?url=$nextUrl');
-    });
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    //   var navigation = message.data['navigation'];
+    //   print("navigation: $navigation");
+    //   String nextUrl = '$url/card/7901';
+    //   context.push('/detail?url=$nextUrl');
+    // });
 
     return WillPopScope(
       onWillPop: () async {

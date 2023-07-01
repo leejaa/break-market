@@ -57,11 +57,11 @@ class WebViewManager {
 
       print("url: $url");
 
-      Uri httpUrl = isProduction
-          ? Uri.https(url2, '/api/notification')
-          : Uri.http(url2, '/api/notification');
+      // Uri httpUrl = isProduction
+      //     ? Uri.https(url2, '/api/notification')
+      //     : Uri.http(url2, '/api/notification');
 
-      var response = await client.post(httpUrl);
+      // var response = await client.post(httpUrl);
     });
   }
 

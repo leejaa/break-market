@@ -42,15 +42,15 @@ class AppleLogin {
     var client = http.Client();
     var notificationManager = NotificationManager();
     var appToken = await notificationManager.getToken();
-    Uri httpUrl = isProduction
-        ? Uri.https(url, '/api/apple_login')
-        : Uri.http(url, '/api/apple_login');
-    var response =
-        await client.post(httpUrl, body: {'code': code, 'appToken': appToken});
+    // Uri httpUrl = isProduction
+    //     ? Uri.https(url, '/api/apple_login')
+    //     : Uri.http(url, '/api/apple_login');
+    // var response =
+    //     await client.post(httpUrl, body: {'code': code, 'appToken': appToken});
 
-    var data = jsonDecode(response.body);
+    // var data = jsonDecode(response.body);
 
-    accessToken = data['accessToken'];
-    refreshToken = data['refreshToken'];
+    // accessToken = data['accessToken'];
+    // refreshToken = data['refreshToken'];
   }
 }
